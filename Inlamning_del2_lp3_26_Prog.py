@@ -250,6 +250,8 @@ def print_plot_line_chart(price_range: int, year:str):
     raise NotImplementedError
 
 
+
+
 def get_all_price(selected_list: list, price_range: int) -> list: 
     data_list = []
     for row in selected_list:
@@ -306,6 +308,7 @@ while True:
                 wait()
                 selected_list = choose_data_list()
                 price_range = choose_price_range()
+                p 
                 get_all_price(selected_list, price_range)
 
                 # price_range = choose_price_range()
