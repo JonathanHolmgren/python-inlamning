@@ -43,10 +43,10 @@ def print_lista(namn):
 # Funktion som tar fram total pris genom att loppa en lista.
 # Inparameter: lista med data, kolumnindexet för prisområde, valt år,
 # Returvärde: Funktionen returnerar en float.
-def calc_total_price(data_list: list, column: int, year: str) -> float:
+def calc_total_price(data_list: list, column: int, year: str | None = None) -> float:
     total_price = 0
     for row in data_list:
-        if row[0] == year:
+        if year is None or row[0] == year:
             total_price += float(row[column])
     return total_price
 
@@ -55,9 +55,13 @@ def calc_total_price(data_list: list, column: int, year: str) -> float:
 # Funktion som tar fram medelpriset genom att loppa en lista.
 # Inparameter: lista med data, kolumnindexet för prisområde, valt år,
 # Returvärde: Funktionen returnerar en float.
-def calc_avg_price(data_list: list, column: int, year: str) -> float:
+def calc_avg_price(data_list: list, column: int, year: str | None = None) -> float:
+    
     total_price = calc_total_price(data_list, column, year)
-    avg_price = total_price / 12
+    if year is None:
+        avg_price = total_price / len(data_list)
+    else:   
+        avg_price = total_price / 12
 
     return avg_price
 
@@ -66,33 +70,42 @@ def calc_avg_price(data_list: list, column: int, year: str) -> float:
 # Funktion som tar fram högsta pris genom att loppa en lista.
 # Inparameter: lista med data, kolumnindexet för prisområde, valt år,
 # Returvärde: Funktionen returnerar en float.
-def calc_max_price(data_list: list, column: int, year: str) -> tuple[float, str]:
+def calc_max_price(data_list: list, column: int, year: str | None = None) -> tuple[float, str]:
     max_price = None
     max_month = None
+    max_year = None
+
     for row in data_list:
-        if row[0] == year:
+        if year is None or row[0] == year:
             temp = float(row[column])  # Priset för aktuell rad
+           
             if max_price is None or temp > max_price:  # Uppdaterar pris, om första rad eller nytt högsta pris.
                 max_price = temp
                 max_month = row[1]
+                max_year = row[0]
 
-    return max_price, max_month[:3]
+    return max_year, max_month[:3], max_price
 
 
 # Deluppgift V: Funktioner från deluppgift V i ordning.
 # Funktion som tar fram lägsta pris genom att loppa en lista.
 # Inparameter: lista med data, index för kolumnen för prisområde, valt år,
 # Returvärde: Funktionen returnerar en float.
-def calc_min_price(data_list: list, column: int, year: str) -> tuple[float, str]:
+def calc_min_price(data_list: list, column: int, year: str | None = None) -> tuple[float, str]:
     min_price = None
     min_month = None
+    min_year = None
+   
     for row in data_list:
-        if row[0] == year:
-            temp = float(row[column])  # Priset för aktuell rad
+        if year is None or row[0] == year:
+            
+            temp = float(row[column]) # Priset för aktuell rad
+             
             if min_price is None or temp < min_price:  # Uppdaterar pris, om första rad eller nytt minsta pris.
                 min_price = temp
                 min_month = row[1]
-    return min_price, min_month[:3]
+                min_year = row[0]
+    return min_year, min_month[:3], min_price
 
 
 # Deluppgift VI: Funktioner från deluppgift IV i ordning.
