@@ -1,0 +1,14 @@
+Kommentarer som jag har ändrat på från del 1.
+
+Jag har tagit bort biblioteket "os".
+
+Uppgift 3
+I funktionen som beräknar medelvärder har jag lagt till if vilkor som kollar om listan innehåller årtal,
+om den innehåller årtal så räknar den på 12 månader annars längden av listan. 
+
+Uppgift 4
+Lagt till månad och år för retur värdet
+
+Uppgift 5
+Lagt till månad och år för retur värdet
+
